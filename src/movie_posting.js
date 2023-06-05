@@ -1,5 +1,6 @@
 export const postingMovie = async () => {
     const moviesInfo = await respondApi('ko-KR');
+    console.log(moviesInfo);
     const $cardList = document.querySelector('#card-list');
 
     $cardList.innerHTML = moviesInfo.map(movie => 
@@ -11,7 +12,7 @@ export const postingMovie = async () => {
     ).join('');
 };
 
-async function respondApi(language) {
+export async function respondApi(language) {
     const options = {
         method: 'GET',
         headers: {

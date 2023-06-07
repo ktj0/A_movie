@@ -66,11 +66,19 @@ export const comment = async () => {
         window.location.reload();
     });
 
-    $cmt.addEventListener('click', e => {
-        localStorage.removeItem(e.target.id.split('-')[0]);
-
-        window.location.reload();
-    });
+    // $cmt.addEventListener('click', e => {
+    //     const $mdfForm = document.querySelector('.mdf-form');
+    //     const mdfF = e.target.parentNode.childNodes[9];
+    //     if (e.target.id.includes('del')) {
+    //         // localStorage.removeItem(e.target.id.split('-')[0]);
+    //         // window.location.reload();
+    //     } else if (e.target.id.includes('mdf')) {
+    //         mdfF.style.display = 'block';
+    //         // console.log(mdfF);
+    //     } else {
+    //         console.log('ccc');
+    //     }
+    // });
 };
 
 export function PostingCmt() {
@@ -94,8 +102,12 @@ export function PostingCmt() {
                 return `<li class="cmt-li">
                         <p id="cmt-id">${userId}</p>
                         <p id="cmt-review">${cmt}</p>
-                        <button id="mdf">수정</button>
+                        <button id="${item}-mdf">수정</button>
                         <button id="${item}-del">삭제</button>
+                        <form class="mdf-form" style="display: none">
+                            <textarea class="mdf-txt" cols="50" rows="5"></textarea>
+                            <button class="mdf-btn">등록</button>
+                        </form>
                     </li>`;
             }
         })

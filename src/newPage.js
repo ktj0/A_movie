@@ -16,6 +16,7 @@ async function movieInfo() {
     const moviesInfo = await respondApi('ko-KR');
 
     const selectMovie = moviesInfo.find(movie => movie['id'] === idParams);
+    alert(`id: ${idParams}`);
 
     $div.innerHTML = `<img src="https://image.tmdb.org/t/p/w200/${selectMovie['poster_path']}" id="img">
                     <p id="title">${selectMovie['title']}</p>

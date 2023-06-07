@@ -66,19 +66,24 @@ export const comment = async () => {
         window.location.reload();
     });
 
-    // $cmt.addEventListener('click', e => {
-    //     const $mdfForm = document.querySelector('.mdf-form');
-    //     const mdfF = e.target.parentNode.childNodes[9];
-    //     if (e.target.id.includes('del')) {
-    //         // localStorage.removeItem(e.target.id.split('-')[0]);
-    //         // window.location.reload();
-    //     } else if (e.target.id.includes('mdf')) {
-    //         mdfF.style.display = 'block';
-    //         // console.log(mdfF);
-    //     } else {
-    //         console.log('ccc');
-    //     }
-    // });
+    $cmt.addEventListener('click', e => {
+        const $mdfForm = document.querySelectorAll('.mdf-form');
+        const mdfF = e.target.parentNode.childNodes[9];
+        // console.log($mdfForm);
+
+        $mdfForm.style.display = 'none';
+
+        if (e.target.id.includes('del')) {
+            localStorage.removeItem(e.target.id.split('-')[0]);
+
+            window.location.reload();
+        } else if (e.target.id.includes('mdf')) {
+            mdfF.style.display = 'block';
+            // console.log(mdfF);
+        } else {
+            console.log('ccc');
+        }
+    });
 };
 
 export function PostingCmt() {

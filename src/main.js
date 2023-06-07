@@ -13,14 +13,15 @@ $searchForm.addEventListener('submit', event => {
 });
 
 const $cardList = document.querySelector('#card-list');
+const $cl = document.querySelectorAll('.movie.card');
 
 $cardList.addEventListener('click', event => {
     if (event.target === $cardList) {
         return;
     }
     if (event.target.matches('.movie-card')) {
-        window.open(`newPage.html?id=${event.target.id}`);
+        location.href = `newPage.html?id=${event.target.id}`;
     } else {
-        window.open(`newPage.html?id=${event.target.parentNode.id}`);
+        location.href = `newPage.html?id=${event.target.parentNode.id}`;
     }
 });

@@ -16,7 +16,7 @@ export const comment = async () => {
         localStorage.removeItem('pwd');
 
         window.location.reload();
-    });
+    });;
 
     $allReset.addEventListener('click', () => {
         localStorage.clear();
@@ -24,17 +24,13 @@ export const comment = async () => {
 
     $form.addEventListener('submit', e => {
         e.preventDefault();
-        if ($id.value !== '' && $pwd.value !== '') {
-            // ID와 PW값이 '' 비어있지않다면 setItem
-            localStorage.setItem('id', $id.value);
-            localStorage.setItem('pwd', $pwd.value);
-            $id.value = '';
-            $pwd.value = '';
-            $form.style.display = 'none';
-        } else {
-            // 비어있다면 alert창 출력
-            alert('ID와 PW를 입력해주세요.');
-        }
+
+        localStorage.setItem('id', $id.value);
+        localStorage.setItem('pwd', $pwd.value);
+
+        $id.value = '';
+        $pwd.value = '';
+        $form.style.display = 'none';
     });
 
     $txt.addEventListener('click', () => {
@@ -48,9 +44,7 @@ export const comment = async () => {
     $form2.addEventListener('submit', e => {
         e.preventDefault();
 
-        const cmtSto = Object.keys(localStorage)
-            .filter(item => !isNaN(item))
-            .sort((a, b) => b - a);
+        const cmtSto = Object.keys(localStorage).filter(item => !isNaN(item)).sort((a, b) => b - a);
         let priKey = 0;
 
         if (!cmtSto.includes('1')) {
@@ -64,40 +58,32 @@ export const comment = async () => {
             cmt: $txt.value,
             movieId: idParams
         };
-        if (obj.cmt !== '') {
-            // 코멘트 입력 칸이 비어있지 않다면 setItem
-            localStorage.setItem(priKey, JSON.stringify(obj));
-            window.location.reload();
-        } else {
-            // 비어있다면 alert창 출력
-            alert('댓글을 입력해주세요');
-        }
+
+        localStorage.setItem(priKey, JSON.stringify(obj));
+
+        window.location.reload();
     });
-};
+}
 
 export function PostingCmt() {
-    const cmtSto = Object.keys(localStorage)
-        .filter(item => !isNaN(item))
-        .sort((a, b) => b - a);
-
+    const cmtSto = Object.keys(localStorage).filter(item => !isNaN(item)).sort((a, b) => b - a);
+    
     if (!localStorage['id']) {
         $reset.style.display = 'none';
     } else {
-        $reset.style.display = 'block';
+        $reset.style.display = 'blaock';
     }
 
-    $cmt.innerHTML = cmtSto
-        .map(item => {
-            const id = JSON.parse(localStorage.getItem(item))['id'];
-            const cmt = JSON.parse(localStorage.getItem(item))['cmt'];
-            const movieId = JSON.parse(localStorage.getItem(item))['movieId'];
+    $cmt.innerHTML = cmtSto.map(item => {
+        const id = JSON.parse(localStorage.getItem(item))['id'];
+        const cmt = JSON.parse(localStorage.getItem(item))['cmt'];
+        const movieId = JSON.parse(localStorage.getItem(item))['movieId'];
 
-            if (movieId === idParams) {
-                return `<li class="cmt-li">
+        if (movieId === idParams) {
+            return `<li class="cmt-li">
                         <p id="cmt-id">${id}</p>
                         <p id="cmt-review">${cmt}</p>
-                    </li>`;
-            }
-        })
-        .join('');
+                    </li>`
+        }
+    }).join('');
 }

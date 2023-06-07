@@ -5,6 +5,11 @@ postingMovie();
 
 const $searchForm = document.querySelector('#search-form');
 const $searchInput = document.querySelector('#search-input');
+const $h1 = document.querySelector('#h1');
+
+$h1.addEventListener('click', () => {
+    window.location.reload();
+});
 
 $searchForm.addEventListener('submit', event => {
     event.preventDefault();

@@ -1,5 +1,5 @@
-import { postingMovie } from "./movie_posting.js";
-import { searcinghMovie } from "./search.js";
+import {postingMovie} from './movie_posting.js';
+import {searcinghMovie} from './search.js';
 
 postingMovie();
 
@@ -10,7 +10,7 @@ $searchForm.addEventListener('submit', event => {
     event.preventDefault();
 
     searcinghMovie($searchInput);
-})
+});
 
 const $cardList = document.querySelector('#card-list');
 
@@ -19,9 +19,8 @@ $cardList.addEventListener('click', event => {
         return;
     }
     if (event.target.matches('.movie-card')) {
-        window.open(`newPage.html?id=${event.target.id}`);
-        
+        location.href = `newPage.html?id=${event.target.id}`;
     } else {
-        window.open(`newPage.html?id=${event.target.parentNode.id}`);
+        location.href = `newPage.html?id=${event.target.parentNode.id}`;
     }
 });

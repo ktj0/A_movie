@@ -3,13 +3,16 @@ export const postingMovie = async () => {
     console.log(moviesInfo);
     const $cardList = document.querySelector('#card-list');
 
-    $cardList.innerHTML = moviesInfo.map(movie => 
-        `<li class="movie-card" id="${movie['id']}">
+    $cardList.innerHTML = moviesInfo
+        .map(
+            movie =>
+                `<li class="movie-card" id="${movie['id']}">
             <img src="https://image.tmdb.org/t/p/w200/${movie['poster_path']}">
             <p class="movie-title">${movie['title']}</p>
             <span style="display:none">${movie['overview']}/${'vote_average'}</span>
         </li>`
-    ).join('');
+        )
+        .join('');
 };
 
 export async function respondApi(language) {

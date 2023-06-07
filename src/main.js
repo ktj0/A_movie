@@ -19,9 +19,8 @@ $cardList.addEventListener('click', event => {
         return;
     }
     if (event.target.matches('.movie-card')) {
-        window.open(`newPage.html?id=${event.target.id}`);
-        
+        location.href = `newPage.html?id=${event.target.id}`
     } else {
-        window.open(`newPage.html?id=${event.target.parentNode.id}`);
+        location.href =`newPage.html?id=${event.target.parentNode.id}`
     }
 });

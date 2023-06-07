@@ -1,18 +1,16 @@
-import { respondApi } from "./movie_posting.js";
-import { comment } from "./comment.js";
-import { PostingCmt } from "./comment.js";
+import {respondApi} from './movie_posting.js';
+import {comment} from './comment.js';
+import {PostingCmt} from './comment.js';
 
 const url = new URL(location.href);
 const idParams = +url.searchParams.get('id');
 const $div = document.querySelector('#div');
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     movieInfo();
     PostingCmt();
     comment();
-})
+});
 
 async function movieInfo() {
     const moviesInfo = await respondApi('ko-KR');
@@ -23,6 +21,4 @@ async function movieInfo() {
                     <p id="title">${selectMovie['title']}</p>
                     <p id="overview">${selectMovie['overview']}</p>
                     <p id="vote-avg">${selectMovie['vote_average']}</p>`;
-
-
-};
+}

@@ -16,7 +16,7 @@ export const comment = async () => {
         localStorage.removeItem('pwd');
 
         window.location.reload();
-    });;
+    });
 
     $allReset.addEventListener('click', () => {
         localStorage.clear();
@@ -44,7 +44,9 @@ export const comment = async () => {
     $form2.addEventListener('submit', e => {
         e.preventDefault();
 
-        const cmtSto = Object.keys(localStorage).filter(item => !isNaN(item)).sort((a, b) => b - a);
+        const cmtSto = Object.keys(localStorage)
+            .filter(item => !isNaN(item))
+            .sort((a, b) => b - a);
         let priKey = 0;
 
         if (!cmtSto.includes('1')) {
@@ -63,27 +65,39 @@ export const comment = async () => {
 
         window.location.reload();
     });
-}
+
+    $cmt.addEventListener('click', e => {
+        localStorage.removeItem(e.target.id.split('-')[0]);
+
+        window.location.reload();
+    });
+};
 
 export function PostingCmt() {
-    const cmtSto = Object.keys(localStorage).filter(item => !isNaN(item)).sort((a, b) => b - a);
-    
+    const cmtSto = Object.keys(localStorage)
+        .filter(item => !isNaN(item))
+        .sort((a, b) => b - a);
+
     if (!localStorage['id']) {
         $reset.style.display = 'none';
     } else {
         $reset.style.display = 'blaock';
     }
 
-    $cmt.innerHTML = cmtSto.map(item => {
-        const id = JSON.parse(localStorage.getItem(item))['id'];
-        const cmt = JSON.parse(localStorage.getItem(item))['cmt'];
-        const movieId = JSON.parse(localStorage.getItem(item))['movieId'];
+    $cmt.innerHTML = cmtSto
+        .map(item => {
+            const userId = JSON.parse(localStorage.getItem(item))['id'];
+            const cmt = JSON.parse(localStorage.getItem(item))['cmt'];
+            const movieId = JSON.parse(localStorage.getItem(item))['movieId'];
 
-        if (movieId === idParams) {
-            return `<li class="cmt-li">
-                        <p id="cmt-id">${id}</p>
+            if (movieId === idParams) {
+                return `<li class="cmt-li">
+                        <p id="cmt-id">${userId}</p>
                         <p id="cmt-review">${cmt}</p>
-                    </li>`
-        }
-    }).join('');
+                        <button id="mdf">수정</button>
+                        <button id="${item}-del">삭제</button>
+                    </li>`;
+            }
+        })
+        .join('');
 }

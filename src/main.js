@@ -13,7 +13,6 @@ $searchForm.addEventListener('submit', event => {
 });
 
 const $cardList = document.querySelector('#card-list');
-const $cl = document.querySelectorAll('.movie.card');
 
 $cardList.addEventListener('click', event => {
     if (event.target === $cardList) {

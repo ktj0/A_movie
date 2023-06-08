@@ -122,7 +122,7 @@ export const comment = async () => {
     });
 };
 
-export function PostingCmt() {
+export async function PostingCmt() {
     const cmtSto = Object.keys(localStorage)
         .filter(item => !isNaN(item))
         .sort((a, b) => b - a);

@@ -56,7 +56,8 @@ export const comment = async () => {
         }
 
         const obj = {
-            id: localStorage.getItem('id'),
+            priKey: priKey,
+            userId: localStorage.getItem('id'),
             cmt: $txt.value,
             movieId: idParams
         };
@@ -80,15 +81,18 @@ export function PostingCmt() {
 
     $cmt.innerHTML = cmtSto
         .map(item => {
-            const id = JSON.parse(localStorage.getItem(item))['id'];
+            const priKey = JSON.parse(localStorage.getItem(item))['priKey'];
+            const userId = JSON.parse(localStorage.getItem(item))['userId'];
             const cmt = JSON.parse(localStorage.getItem(item))['cmt'];
             const movieId = JSON.parse(localStorage.getItem(item))['movieId'];
 
             if (movieId === idParams) {
-                return `<li class="cmt-li">
-                        <p id="cmt-id">${id}</p>
-                        <p id="cmt-review">${cmt}</p>
-                    </li>`;
+                return `<li id="${priKey}" class="cmt-li">
+                            <p class="user-id">${userId}</p>
+                            <textarea class="cmt-review" cols="50" rows="5" readonly>${cmt}</textarea><br>
+                            <button class="mdf">수정</button>
+                            <button class="del">삭제</button>
+                        </li>`;
             }
         })
         .join('');

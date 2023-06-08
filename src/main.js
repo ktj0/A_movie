@@ -9,7 +9,7 @@ const $searchInput = document.querySelector('#search-input');
 $searchForm.addEventListener('submit', event => {
     event.preventDefault();
 
-    searcinghMovie($searchInput);
+    searchinghMovie($searchInput);
 })
 
 const $cardList = document.querySelector('#card-list');

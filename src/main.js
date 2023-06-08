@@ -17,7 +17,6 @@ $searchForm.addEventListener('submit', event => {
 
     if (!$searchInput.value) {
         alert('영화 제목을 입력해주세요.');
-
         $searchInput.focus();
     } else {
         searcinghMovie($searchInput);
@@ -31,8 +30,8 @@ $cardList.addEventListener('click', event => {
         return;
     }
     if (event.target.matches('.movie-card')) {
-        location.href = `newPage.html?id=${event.target.id}`;
+        location.href = `newPage.html?id=${event.target.id}`
     } else {
-        location.href = `newPage.html?id=${event.target.parentNode.id}`;
+        location.href =`newPage.html?id=${event.target.parentNode.id}`
     }
 });

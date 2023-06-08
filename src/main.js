@@ -1,5 +1,5 @@
 import {postingMovie} from './movie_posting.js';
-import {searcinghMovie} from './search.js';
+import {searchinghMovie} from './search.js';
 
 postingMovie();
 
@@ -19,7 +19,7 @@ $searchForm.addEventListener('submit', event => {
         alert('영화 제목을 입력해주세요.');
         $searchInput.focus();
     } else {
-        searcinghMovie($searchInput);
+        searchinghMovie($searchInput);
     }
 });
 

@@ -13,8 +13,15 @@ $h1.addEventListener('click', () => {
 
 $searchForm.addEventListener('submit', event => {
     event.preventDefault();
+    console.log($searchInput);
 
-    searcinghMovie($searchInput);
+    if (!$searchInput.value) {
+        alert('영화 제목을 입력해주세요.');
+
+        $searchInput.focus();
+    } else {
+        searcinghMovie($searchInput);
+    }
 });
 
 const $cardList = document.querySelector('#card-list');

@@ -1,16 +1,27 @@
-import { postingMovie } from "./movie_posting.js";
-import { searcinghMovie } from "./search.js";
+import {postingMovie} from './movie_posting.js';
+import {searcinghMovie} from './search.js';
 
 postingMovie();
 
 const $searchForm = document.querySelector('#search-form');
 const $searchInput = document.querySelector('#search-input');
+const $h1 = document.querySelector('#h1');
+
+$h1.addEventListener('click', () => {
+    window.location.reload();
+});
 
 $searchForm.addEventListener('submit', event => {
     event.preventDefault();
+    console.log($searchInput);
 
-    searchinghMovie($searchInput);
-})
+    if (!$searchInput.value) {
+        alert('영화 제목을 입력해주세요.');
+        $searchInput.focus();
+    } else {
+        searcinghMovie($searchInput);
+    }
+});
 
 const $cardList = document.querySelector('#card-list');
 

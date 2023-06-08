@@ -28,7 +28,7 @@ export const comment = async () => {
         if (!$id.value && !$pwd.value) {
             // 비어있다면 alert창 출력
             alert('ID와 PW를 입력해주세요.');
-        } else if (!$id.value) {
+        } else if ($id.value === ' ') {
             alert('ID를 입력해주세요.');
         } else if (!$pwd.value) {
             alert('PW를 입력해주세요.');
@@ -54,7 +54,7 @@ export const comment = async () => {
     $form2.addEventListener('submit', e => {
         e.preventDefault();
 
-        if (!$txt.value) {
+        if ($txt.value === '') {
             // 비어있다면 alert창 출력
             alert('댓글을 입력해주세요');
         } else {
@@ -87,7 +87,7 @@ export const comment = async () => {
             if (e.target.parentNode.querySelector('.user-id').textContent !== localStorage.getItem('id')) {
                 alert('아이디가 일치하지 않습니다.');
             } else {
-                if (confirm('댓글을 정말로 수정하시겠습니까?')) {
+                if (confirm('댓글을 정말로 삭제하시겠습니까?')) {
                     localStorage.removeItem(e.target.parentNode.id);
 
                     window.location.reload();
@@ -115,6 +115,8 @@ export const comment = async () => {
                     cmt: e.target.parentNode.querySelector('.cmt-review').value,
                     movieId: JSON.parse(localStorage.getItem(key))['movieId']
                 };
+
+                localStorage.setItem(key, JSON.stringify(mdfSto));
 
                 window.location.reload();
             }

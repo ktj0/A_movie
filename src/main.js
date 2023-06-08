@@ -1,5 +1,5 @@
 import {postingMovie} from './movie_posting.js';
-import {searchinghMovie} from './search.js';
+import {searchingMovie} from './search.js';
 
 const $searchForm = document.querySelector('#search-form');
 const $searchInput = document.querySelector('#search-input');
@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!titleParams) {
         postingMovie();
     } else {
-        console.log(titleParams);
-        searchinghMovie(titleParams);
+        searchingMovie(titleParams);
     }
 });
 
@@ -22,14 +21,12 @@ $h1.addEventListener('click', () => {
 
 $searchForm.addEventListener('submit', event => {
     event.preventDefault();
-    console.log($searchInput);
 
     if (!$searchInput.value) {
         alert('영화 제목을 입력해주세요.');
         $searchInput.focus();
     } else {
         location.href = `index.html?search=${$searchInput.value}`;
-        // searchinghMovie($searchInput);
     }
 });
 

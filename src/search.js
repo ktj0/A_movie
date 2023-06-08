@@ -1,11 +1,8 @@
-export const searchinghMovie = async $searchInput => {
+export const searchingMovie = async $searchInput => {
     const searchValue = $searchInput;
     const searchInfo = await respondApi(searchValue);
     const $searchCard = document.querySelector('#card-list');
 
-    console.log($searchInput);
-    console.log($searchCard);
-    console.log(searchInfo);
     $searchCard.innerHTML = '';
 
     $searchCard.innerHTML = searchInfo

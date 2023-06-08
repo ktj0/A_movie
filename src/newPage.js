@@ -8,8 +8,6 @@ const titleParams = url.searchParams.get('title');
 const $div = document.querySelector('#div');
 const $h1 = document.querySelector('#h1');
 
-console.log(titleParams);
-
 document.addEventListener('DOMContentLoaded', async () => {
     // setTimeout(movieInfo, 1000);
     // setTimeout(PostingCmt, 1000);

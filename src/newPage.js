@@ -17,6 +17,14 @@ $h1.addEventListener('click', () => {
     history.go(-1);
 });
 
+// console.log($div);
+
+$div.addEventListener('click', e => {
+    if (e.target.id === 'img') {
+        alert(`영화 ID: ${idParams}`);
+    }
+});
+
 async function movieInfo() {
     const moviesInfo = await respondApi('ko-KR');
 

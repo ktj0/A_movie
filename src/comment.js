@@ -68,17 +68,56 @@ export const comment = async () => {
             } else {
                 priKey = +cmtSto[0] + 1;
             }
-
             const obj = {
                 priKey: priKey,
                 userId: localStorage.getItem('id'),
                 cmt: $txt.value,
                 movieId: idParams
             };
-            // 코멘트 입력 칸이 비어있지 않다면 setItem
+
             localStorage.setItem(priKey, JSON.stringify(obj));
 
             window.location.reload();
+        }
+    });
+
+    let duplicationCheck = true;
+    $cmt.addEventListener('click', e => {
+        if (e.target.className === 'del') {
+            if (e.target.parentNode.querySelector('.user-id').textContent !== localStorage.getItem('id')) {
+                alert('아이디가 일치하지 않습니다.');
+            } else {
+                if (confirm('댓글을 정말로 수정하시겠습니까?')) {
+                    localStorage.removeItem(e.target.parentNode.id);
+
+                    window.location.reload();
+                }
+            }
+        } else if (e.target.className === 'mdf' && duplicationCheck) {
+            if (e.target.parentNode.querySelector('.user-id').textContent !== localStorage.getItem('id')) {
+                alert('아이디가 일치하지 않습니다.');
+            } else {
+                const cmtReview = e.target.parentNode.querySelector('.cmt-review');
+
+                cmtReview.removeAttribute('readonly');
+                cmtReview.style.border = '1px solid';
+                cmtReview.select();
+                e.target.innerText = '등록';
+
+                duplicationCheck = false;
+            }
+        } else if (e.target.className === 'mdf' && !duplicationCheck) {
+            if (confirm('댓글을 정말로 수정하시겠습니까?')) {
+                const key = e.target.parentNode.id;
+                const mdfSto = {
+                    priKey: JSON.parse(localStorage.getItem(key))['priKey'],
+                    userId: JSON.parse(localStorage.getItem(key))['userId'],
+                    cmt: e.target.parentNode.querySelector('.cmt-review').value,
+                    movieId: JSON.parse(localStorage.getItem(key))['movieId']
+                };
+
+                window.location.reload();
+            }
         }
     });
 };

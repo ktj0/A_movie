@@ -1,13 +1,18 @@
-import {respondApi} from './movie_posting.js';
 import {comment} from './comment.js';
 import {PostingCmt} from './comment.js';
+import {respondApi} from './search.js';
 
 const url = new URL(location.href);
 const idParams = +url.searchParams.get('id');
+const titleParams = url.searchParams.get('title');
 const $div = document.querySelector('#div');
 const $h1 = document.querySelector('#h1');
 
-document.addEventListener('DOMContentLoaded', () => {
+console.log(titleParams);
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // setTimeout(movieInfo, 1000);
+    // setTimeout(PostingCmt, 1000);
     movieInfo();
     PostingCmt();
     comment();
@@ -24,7 +29,7 @@ $div.addEventListener('click', e => {
 });
 
 async function movieInfo() {
-    const moviesInfo = await respondApi('ko-KR');
+    const moviesInfo = await respondApi(titleParams);
 
     const selectMovie = moviesInfo.find(movie => movie['id'] === idParams);
 

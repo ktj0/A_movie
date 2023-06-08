@@ -1,7 +1,12 @@
 export const searchinghMovie = async $searchInput => {
-    const searchValue = $searchInput.value;
+    const searchValue = $searchInput;
     const searchInfo = await respondApi(searchValue);
     const $searchCard = document.querySelector('#card-list');
+
+    console.log($searchInput);
+    console.log($searchCard);
+    console.log(searchInfo);
+    $searchCard.innerHTML = '';
 
     $searchCard.innerHTML = searchInfo
         .map(
@@ -14,7 +19,7 @@ export const searchinghMovie = async $searchInput => {
         .join('');
 };
 
-async function respondApi(searchValue) {
+export async function respondApi(searchValue) {
     const options = {
         method: 'GET',
         headers: {

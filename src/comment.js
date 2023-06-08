@@ -67,8 +67,9 @@ export const comment = async () => {
         window.location.reload();
     });
 
+    let duplicationCheck = true;
     $cmt.addEventListener('click', e => {
-        if (e.target.textContent === '삭제') {
+        if (e.target.className === 'del') {
             if (e.target.parentNode.querySelector('.user-id').textContent !== localStorage.getItem('id')) {
                 alert('아이디가 일치하지 않습니다.');
             } else {
@@ -78,7 +79,7 @@ export const comment = async () => {
                     window.location.reload();
                 }
             }
-        } else if (e.target.textContent === '수정') {
+        } else if (e.target.className === 'mdf' && duplicationCheck) {
             if (e.target.parentNode.querySelector('.user-id').textContent !== localStorage.getItem('id')) {
                 alert('아이디가 일치하지 않습니다.');
             } else {
@@ -88,8 +89,10 @@ export const comment = async () => {
                 cmtReview.style.border = '1px solid';
                 cmtReview.select();
                 e.target.innerText = '등록';
+
+                duplicationCheck = false;
             }
-        } else if (e.target.textContent === '등록') {
+        } else if (e.target.className === 'mdf' && !duplicationCheck) {
             if (confirm('댓글을 정말로 수정하시겠습니까?')) {
                 const key = e.target.parentNode.id;
                 const mdfSto = {
@@ -131,8 +134,8 @@ export function PostingCmt() {
                 return `<li id="${priKey}" class="cmt-li">
                             <p class="user-id">${userId}</p>
                             <textarea class="cmt-review" cols="50" rows="5" readonly>${cmt}</textarea><br>
-                            <button>수정</button>
-                            <button>삭제</button>
+                            <button class="mdf">수정</button>
+                            <button class="del">삭제</button>
                         </li>`;
             }
         })

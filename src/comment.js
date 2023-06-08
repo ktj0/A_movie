@@ -66,47 +66,6 @@ export const comment = async () => {
 
         window.location.reload();
     });
-
-    $cmt.addEventListener('click', e => {
-        if (e.target.textContent === '삭제') {
-            if (e.target.parentNode.querySelector('.user-id').textContent !== localStorage.getItem('id')) {
-                alert('아이디가 일치하지 않습니다.');
-            } else {
-                if (confirm('댓글을 정말로 삭제하시겠습니까?')) {
-                    localStorage.removeItem(e.target.parentNode.id);
-
-                    window.location.reload();
-                }
-            }
-        } else if (e.target.textContent === '수정') {
-            if (e.target.parentNode.querySelector('.user-id').textContent !== localStorage.getItem('id')) {
-                alert('아이디가 일치하지 않습니다.');
-            } else {
-                const cmtReview = e.target.parentNode.querySelector('.cmt-review');
-
-                cmtReview.removeAttribute('readonly');
-                cmtReview.style.border = '1px solid';
-                cmtReview.select();
-                e.target.innerText = '등록';
-            }
-        } else if (e.target.textContent === '등록') {
-            if (confirm('댓글을 정말로 수정하시겠습니까?')) {
-                const key = e.target.parentNode.id;
-                const mdfSto = {
-                    priKey: JSON.parse(localStorage.getItem(key))['priKey'],
-                    userId: JSON.parse(localStorage.getItem(key))['userId'],
-                    cmt: e.target.parentNode.querySelector('.cmt-review').value,
-                    movieId: JSON.parse(localStorage.getItem(key))['movieId']
-                };
-
-                localStorage.setItem(key, JSON.stringify(mdfSto));
-
-                window.location.reload();
-            } else {
-                window.location.reload();
-            }
-        }
-    });
 };
 
 export function PostingCmt() {
@@ -131,8 +90,8 @@ export function PostingCmt() {
                 return `<li id="${priKey}" class="cmt-li">
                             <p class="user-id">${userId}</p>
                             <textarea class="cmt-review" cols="50" rows="5" readonly>${cmt}</textarea><br>
-                            <button>수정</button>
-                            <button>삭제</button>
+                            <button class="mdf">수정</button>
+                            <button class="del">삭제</button>
                         </li>`;
             }
         })
